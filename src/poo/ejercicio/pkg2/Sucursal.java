@@ -15,7 +15,8 @@ public class Sucursal {
     private String nombre;
     private ArrayList<Instrumento> instrumentos;
 
-    public Sucursal() {
+    public Sucursal(String nombre) {
+        this.nombre = nombre;
         this.instrumentos = new ArrayList<>();
     }
 
@@ -24,11 +25,20 @@ public class Sucursal {
     }
 
     public void listarInstrumentos() {
-
+        for (Instrumento instrumento : instrumentos) {
+            System.out.println(instrumento);
+        }
     }
 
     public ArrayList<Instrumento> instrumentosPorTipo(TipoDeInstrumento tipoDeInstrumento) {
-        return null;
+        ArrayList<Instrumento> instrumentosPorTipo = new ArrayList<>();
+        for (Instrumento instrumento : instrumentos) {
+            if (instrumento.getTipoDeInstrumento().equals(tipoDeInstrumento)) {
+                instrumentosPorTipo.add(instrumento);
+            }
+        }
+        
+        return instrumentosPorTipo;
     }
 
     public Instrumento borrarInstrumento(String ID) {
@@ -43,14 +53,12 @@ public class Sucursal {
 
     }
 
-    public Instrumento buscarInstrumento(){
-    return null;
-    }
-    
+//    public Instrumento buscarInstrumento() {
+//        return null;
+//    }
+
     public String getnombre() {
         return this.nombre;
     }
-    
-    
 
 }

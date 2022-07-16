@@ -23,7 +23,9 @@ public class Fabrica {
     }
 
     public void listarInstrumentos() {
-
+        for (Sucursal sucural  : sucursales) {
+            sucural.listarInstrumentos();
+        }
     }
 
     public ArrayList<Instrumento> instrumentosPorTipo(TipoDeInstrumento tipoDeInstrumento) {
