@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Fabrica {
 
+    private String nombre;
     private ArrayList<Sucursal> sucursales;
 
     public Fabrica() {
@@ -19,33 +20,59 @@ public class Fabrica {
     }
 
     public void agregarSucursal(Sucursal sucursal) {
-        this.sucursales.add(sucursal);
+        sucursales.add(sucursal);
     }
 
     public void listarInstrumentos() {
-        for (Sucursal sucural : sucursales) {
-            sucural.listarInstrumentos();
-        }
-    }
-
-    public ArrayList<Instrumento> instrumentosPorTipo(TipoDeInstrumento tipoDeInstrumento) {
-        return null;
-    }
-
-    public Instrumento borrarInstrumento(String ID) {
-        Instrumento instrumentoBorrado = new Instrumento();
         for (Sucursal sucursal : sucursales) {
-        instrumentoBorrado = sucursal.borrarInstrumento(ID);
+            sucursal.listarInstrumentos();
         }
-        return instrumentoBorrado;
     }
 
-    public double[] porcentajeInstrumentosPorTipo() {
-        return null;
+    public ArrayList instrumentosPorTipo(TipoDeInstrumento instrumento) {
+        ArrayList<Instrumento> instrumentosPorTipo = new ArrayList<>();
+        ArrayList<Instrumento> instrumentosPorTipoRecibidos;
+
+        for (Sucursal sucursal : sucursales) {
+            instrumentosPorTipoRecibidos = sucursal.instrumentosPorTipo(instrumento);
+            for (Instrumento x : instrumentosPorTipoRecibidos) {
+                instrumentosPorTipo.add(x);
+            }
+        }
+
+        return instrumentosPorTipo;
+
+    }
+
+    public void borrarInstrumento(String ID) {
+        for (Sucursal sucursal : sucursales) {
+            sucursal.borrarInstrumento(ID);
+        }
+    }
+
+    public double[] porcentajeInstrumentosPorTipo(String nombre) {
+        double[] porcentajes = new double[TipoDeInstrumento.values().length];
+        Sucursal sucursalEncontrada = buscarSucursal(nombre);
+        if (sucursalEncontrada != null) {
+            porcentajes = sucursalEncontrada.porcentajeInstrumentosPorTipo();
+        }
+
+        return porcentajes;
     }
 
     public Sucursal buscarSucursal(String nombre) {
-        return null;
+        Sucursal sucursalEncontrada = new Sucursal();
+        int posicion = 0;
+
+        while (posicion < sucursales.size() && !this.sucursales.get(posicion).getNombre().equals(nombre)) {
+            posicion++;
+        }
+
+        if (posicion < sucursales.size()) {
+            sucursalEncontrada = this.sucursales.get(posicion);
+        }
+
+        return sucursalEncontrada;
     }
 
 }

@@ -23,6 +23,11 @@ public class POOEjercicio2 {
         Sucursal sucursal3 = new Sucursal("SucurdalC");
         Sucursal sucursal4 = new Sucursal("SucurdalD");
         
+        //Agregando las sucursales a la fabrica
+        fabrica1.agregarSucursal(sucursal1);
+        fabrica1.agregarSucursal(sucursal2);
+        fabrica1.agregarSucursal(sucursal3);
+        fabrica1.agregarSucursal(sucursal4);
 
         //Instrumentos sucursal 1
         Instrumento instrumento1 = new Instrumento("001", 100, TipoDeInstrumento.VIENTO);
@@ -45,6 +50,27 @@ public class POOEjercicio2 {
         sucursal1.agregarInstrumento(instrumento4);
         sucursal1.agregarInstrumento(instrumento5);
         sucursal1.agregarInstrumento(instrumento6);
+        
+        //Agregando los instrumentos a las respectivas sucursales
+        sucursal2.agregarInstrumento(instrumento11);
+        sucursal2.agregarInstrumento(instrumento12);
+        sucursal2.agregarInstrumento(instrumento13);
+        sucursal2.agregarInstrumento(instrumento14);
+        
+        
+        fabrica1.listarInstrumentos();
+        
+        for (Object x : fabrica1.instrumentosPorTipo(TipoDeInstrumento.VIENTO)) {
+            System.out.println(x);
+        }
+        
+        fabrica1.borrarInstrumento("010");
+        System.out.println("--------------------------------------------------");
+        fabrica1.listarInstrumentos();
+
+        for (int i = 0; i < fabrica1.porcentajeInstrumentosPorTipo("SucuralA").length; i++) {
+            System.out.println(fabrica1.porcentajeInstrumentosPorTipo("SucuralA")[i]);
+        }
     }
     
 }

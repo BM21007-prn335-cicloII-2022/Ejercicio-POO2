@@ -13,8 +13,11 @@ import java.util.Iterator;
  */
 public class Sucursal {
 
-    private String nombre;
+   private String nombre;
     private ArrayList<Instrumento> instrumentos;
+
+    public Sucursal() {
+    }
 
     public Sucursal(String nombre) {
         this.nombre = nombre;
@@ -22,7 +25,7 @@ public class Sucursal {
     }
 
     public void agregarInstrumento(Instrumento instrumento) {
-        this.instrumentos.add(instrumento);
+        instrumentos.add(instrumento);
     }
 
     public void listarInstrumentos() {
@@ -31,43 +34,51 @@ public class Sucursal {
         }
     }
 
-    public ArrayList<Instrumento> instrumentosPorTipo(TipoDeInstrumento tipoDeInstrumento) {
+    public ArrayList instrumentosPorTipo(TipoDeInstrumento instrumento) {
         ArrayList<Instrumento> instrumentosPorTipo = new ArrayList<>();
-        for (Instrumento instrumento : instrumentos) {
-            if (instrumento.getTipoDeInstrumento().equals(tipoDeInstrumento)) {
-                instrumentosPorTipo.add(instrumento);
+
+        for (Instrumento a : instrumentos) {
+            if (a.getTipoDeInstrumento().equals(instrumento)) {
+                instrumentosPorTipo.add(a);
             }
         }
-        
+
         return instrumentosPorTipo;
     }
 
-    public Instrumento borrarInstrumento(String ID) {
-        Instrumento instrumentoBorrado = new Instrumento();
+    public void borrarInstrumento(String ID) {
         Iterator<Instrumento> iterador = instrumentos.iterator();
-        while (iterador.hasNext()) {            
+        while (iterador.hasNext()) {
             if (iterador.next().getID().equals(ID)) {
                 iterador.remove();
-                instrumentoBorrado = iterador.next();
             }
         }
-        return instrumentoBorrado;
+
     }
 
     public double[] porcentajeInstrumentosPorTipo() {
-        return null;
+        final int CANT_INSTRUMENTOS = TipoDeInstrumento.values().length;
+        double[] porcentajes = new double[CANT_INSTRUMENTOS];
+        for (Instrumento instrumento : instrumentos) {
+            porcentajes[instrumento.getTipoDeInstrumento().ordinal()]++;
+        }
+        absolutoAPorcentaje(porcentajes);
+        return porcentajes;
     }
 
-    public void porcentajeAbsoluto(double[] porcentajes) {
-
+    private void absolutoAPorcentaje(double[] porcentajes) {
+        for (int i = 0; i < porcentajes.length; i++) {
+            porcentajes[i] = (porcentajes[i] * 100) / instrumentos.size();
+        }
     }
 
-//    public Instrumento buscarInstrumento() {
-//        return null;
-//    }
-
-    public String getnombre() {
+    public String getNombre() {
         return this.nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Sucursal{" + "nombre=" + nombre + '}';
     }
 
 }
