@@ -23,7 +23,7 @@ public class Fabrica {
     }
 
     public void listarInstrumentos() {
-        for (Sucursal sucural  : sucursales) {
+        for (Sucursal sucural : sucursales) {
             sucural.listarInstrumentos();
         }
     }
@@ -33,7 +33,11 @@ public class Fabrica {
     }
 
     public Instrumento borrarInstrumento(String ID) {
-        return null;
+        Instrumento instrumentoBorrado = new Instrumento();
+        for (Sucursal sucursal : sucursales) {
+        instrumentoBorrado = sucursal.borrarInstrumento(ID);
+        }
+        return instrumentoBorrado;
     }
 
     public double[] porcentajeInstrumentosPorTipo() {

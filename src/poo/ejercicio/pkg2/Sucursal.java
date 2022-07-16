@@ -5,6 +5,7 @@
 package poo.ejercicio.pkg2;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -42,7 +43,15 @@ public class Sucursal {
     }
 
     public Instrumento borrarInstrumento(String ID) {
-        return null;
+        Instrumento instrumentoBorrado = new Instrumento();
+        Iterator<Instrumento> iterador = instrumentos.iterator();
+        while (iterador.hasNext()) {            
+            if (iterador.next().getID().equals(ID)) {
+                iterador.remove();
+                instrumentoBorrado = iterador.next();
+            }
+        }
+        return instrumentoBorrado;
     }
 
     public double[] porcentajeInstrumentosPorTipo() {
